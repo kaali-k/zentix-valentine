@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Couple Name Generator | Zentix</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+New:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="global.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <style>
+        .generator-container {
+            max-width: 600px;
+            margin: 4rem auto;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        select {
+            width: 100%;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+            color: white;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+        }
+
+        select:focus {
+            outline: none;
+            border-color: var(--secondary);
+        }
+
+        /* Terminal Result Style */
+        #result-area {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: #000;
+            border: 1px solid #333;
+            border-left: 5px solid var(--primary);
+            border-radius: 8px;
+            display: none;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .terminal-header {
+            color: #888;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #222;
+            padding-bottom: 0.5rem;
+        }
+
+        .prompt {
+            color: var(--primary);
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .couple-name {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary);
+            text-shadow: 0 0 10px rgba(0, 242, 255, 0.4);
+            margin: 1rem 0;
+            display: block;
+        }
+
+        .cmd-cursor {
+            display: inline-block;
+            width: 10px;
+            height: 20px;
+            background: var(--secondary);
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        .btn-download {
+            margin-top: 20px;
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .btn-download:hover {
+            background: var(--primary);
+            color: white;
+            box-shadow: var(--glow-primary);
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">Zentix<span class="brand-span">Gen</span></a>
+        <a href="index.html" class="btn btn-outline" style="padding: 8px 20px; font-size: 0.9rem;">Back to Hub</a>
+    </nav>
+
+    <div class="container generator-container glass-panel">
+        <h1>❤️ Couple Name Generator</h1>
+        <p style="margin-bottom: 2rem; opacity: 0.9;">Find out your special Zentix love handle!</p>
+
+        <div class="input-group">
+            <label>I am a:</label>
+            <select id="genderSelect">
+                <option value="boy">Boy (Looking for Her Name)</option>
+                <option value="girl">Girl (Looking for His Name)</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label>Partner's Name First Letter:</label>
+            <select id="letterSelect"></select>
+        </div>
+
+        <div class="input-group">
+            <label>Partner's Birth Month:</label>
+            <select id="monthSelect">
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+            </select>
+        </div>
+
+        <button onclick="generate()" class="btn btn-primary" style="width: 100%;">Run Generator</button>
+
+        <div id="result-wrapper" style="display:none;">
+            <div id="result-area">
+                <div class="terminal-header">root@zentix-love:~</div>
+                <div><span class="prompt">$</span> initializing love_algorithm...</div>
+                <div><span class="prompt">$</span> scanning user_gender...</div>
+                <div><span class="prompt">$</span> match found!</div>
+                <br>
+                <div class="couple-name" id="finalName">Loading...</div>
+                <div style="font-size: 0.8rem; color: #666; margin-top: 10px;">// Powered by Zentix</div>
+            </div>
+
+            <br>
+            <div style="display: flex; gap: 10px; justify-content: center; margin-top: 15px;">
+                <button onclick="downloadImage()" class="btn btn-download">⬇ Download</button>
+                <button onclick="shareImage()" class="btn btn-download" style="border-color: var(--secondary); color: var(--secondary);">📤 Share</button>
+            </div>
+        </div>
+    <footer style="text-align: center; padding: 20px; color: white; width: 100%; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 50px;">
+        <p>Powered by <strong><a href="https://web.facebook.com/profile.php?id=61584803565063" target="_blank" style="color: inherit; text-decoration: none;">Zentix</a></strong> & <strong><a href="https://kaali-k.github.io/kalanasahan-portfolio/" target="_blank" style="color: inherit; text-decoration: none;">K.S.D</a></strong></p>
+        <p style="font-size: 0.8rem; margin-top: 5px;">Powered by Zentix - Connected Intelligence</p>
+        <p style="font-size: 0.8rem; margin-top: 5px;">#ZentixValentine #TechLove</p>
+    </footer>
+    </div>
+
+    <script src="data.js"></script>
+    <script>
+        // Populate A-Z
+        const letterSelect = document.getElementById('letterSelect');
+        const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        
+        for (let char of alphabet) {
+            const option = document.createElement('option');
+            option.value = char;
+            option.textContent = `${char}`;
+            letterSelect.appendChild(option);
+        }
+
+        function generate() {
+            const gender = document.getElementById('genderSelect').value;
+            const letter = letterSelect.value;
+            const month = parseInt(document.getElementById('monthSelect').value);
+
+            // Get random adjective (Common Tech Adjectives)
+            const adjectives = nameData[letter] || nameData['Z'];
+            const randomAdj = adjectives[Math.floor(Math.random() * adjectives.length)];
+
+            // Pick suffix array based on USER'S gender
+            // If Boy -> Looking for Girl Name (use femaleSuffixes)
+            // If Girl -> Looking for Boy Name (use maleSuffixes)
+            let suffix = "";
+            if (gender === 'boy') {
+                 suffix = femaleSuffixes[month];
+            } else {
+                 suffix = maleSuffixes[month];
+            }
+
+            const finalName = `< ${randomAdj}_${suffix} />`;
+            
+            const resultWrapper = document.getElementById('result-wrapper');
+            const resultArea = document.getElementById('result-area');
+            const nameDisplay = document.getElementById('finalName');
+
+            resultWrapper.style.display = 'block';
+            resultArea.style.display = 'block';
+            nameDisplay.innerText = finalName;
+        }
+
+        function downloadImage() {
+            const element = document.getElementById("result-area");
+            html2canvas(element, { backgroundColor: "#000" }).then(canvas => {
+                const link = document.createElement("a");
+                link.download = "zentix-couple-name.png";
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+        }
+
+        async function shareImage() {
+            const element = document.getElementById("result-area");
+            try {
+                const canvas = await html2canvas(element, { backgroundColor: "#000" });
+                canvas.toBlob(async (blob) => {
+                    if (!blob) return;
+
+                    // Check if native sharing is supported
+                    if (navigator.share) {
+                        const file = new File([blob], "zentix-couple-name.png", { type: "image/png" });
+                        try {
+                            await navigator.share({
+                                files: [file],
+                                title: 'My Zentix Couple Name',
+                                text: 'Check out my Zentix Tech-Valentine Name! #ZentixVAL'
+                            });
+                        } catch (err) {
+                            console.log("Share skipped", err);
+                        }
+                    } else {
+                        alert("Sharing not supported on this device. Please Download instead!");
+                    }
+                });
+            } catch (err) {
+                console.error("Error sharing:", err);
+            }
+        }
+    </script>
+</body>
+</html>

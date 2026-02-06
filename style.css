@@ -1,0 +1,251 @@
+:root {
+  --primary-color: #ff4b6e;
+  --secondary-color: #ff8fa3;
+  --bg-gradient: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+  --glass-bg: rgba(255, 255, 255, 0.25);
+  --glass-border: rgba(255, 255, 255, 0.5);
+  --text-color: #333;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Outfit", sans-serif;
+  background: var(--bg-gradient);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px; /* Safe space */
+  position: relative;
+}
+
+.container {
+  text-align: center;
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+}
+
+/* Glass Card Effect */
+.content {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 3rem 2rem;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  margin: 20px;
+  position: relative;
+  z-index: 10;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #d63354;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.highlight {
+  color: #ff2e63;
+  font-weight: 700;
+}
+
+.cute-gif {
+  width: 150px;
+  height: auto;
+  margin-bottom: 2rem;
+  border-radius: 10px;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  position: relative;
+  /* Ensure height so moving button doesn't collapse layout if it goes absolute */
+  min-height: 60px;
+  align-items: center;
+}
+
+.btn {
+  padding: 15px 40px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-family: "Outfit", sans-serif;
+  font-weight: 600;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+  outline: none;
+}
+
+.btn-primary {
+  background: #ff4b6e;
+  color: white;
+  box-shadow: 0 4px 15px rgba(255, 75, 110, 0.4);
+}
+
+.btn-primary:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(255, 75, 110, 0.6);
+}
+
+.btn-secondary {
+  background: white;
+  color: #ff4b6e;
+  border: 2px solid #ff4b6e;
+}
+
+/* Success Overlay */
+.success-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.success-overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.success-content {
+  background: white;
+  padding: 3rem;
+  border-radius: 20px;
+  text-align: center;
+  max-width: 90%;
+  animation: popUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.success-content h1 {
+  color: #ff4b6e;
+  margin-bottom: 0.5rem;
+}
+
+.success-content p {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.branding {
+  font-size: 0.9rem;
+  color: #888;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.brand-name {
+  font-weight: 700;
+  color: #333;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Animations */
+@keyframes popUp {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.bounce-in {
+  animation: bounce 1s;
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-20px);
+  }
+  60% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Background Hearts - Optional simple particles can be done in CSS or JS. 
+   Let's keep it simple CSS for now or rely on canvas confetti later. 
+*/
+
+/* CSS Animated Pulse Heart */
+.css-heart {
+  position: relative;
+  width: 100px;
+  height: 90px;
+  animation: pulse 1.2s infinite;
+}
+
+.css-heart:before,
+.css-heart:after {
+  position: absolute;
+  content: "";
+  left: 50px;
+  top: 0;
+  width: 50px;
+  height: 80px;
+  background: var(--primary-color);
+  border-radius: 50px 50px 0 0;
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
+}
+
+.css-heart:after {
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* Ensure content stays within viewport and buttons don't clip */
+.content {
+    overflow: hidden; /* Constrain absolute child (No button) */
+    min-height: 400px;
+}
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 2rem;
+  }
+  .btn {
+    padding: 12px 30px;
+    font-size: 1rem;
+  }
+}

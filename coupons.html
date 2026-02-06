@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Love Coupons | Zentix</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="global.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        .coupon-container {
+            max-width: 500px;
+            margin: 4rem auto;
+            text-align: center;
+        }
+
+        /* Shuffle Card Container */
+        #result-area {
+            margin-top: 2rem;
+            display: none; /* Hidden by default */
+            animation: popUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .coupon-card {
+            background: #15151e;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 0;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.15);
+            position: relative;
+            text-align: center;
+        }
+
+        .coupon-header {
+            background: var(--primary);
+            padding: 1.5rem;
+            color: white;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 1.2rem;
+            position: relative;
+            border-bottom: 3px dashed #15151e;
+        }
+        
+        /* Ear/Hole Effect */
+        .coupon-header::before, .coupon-header::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            width: 30px;
+            height: 30px;
+            background: var(--dark); /* Bg match */
+            border-radius: 50%;
+            z-index: 10;
+        }
+        .coupon-header::before { left: -15px; }
+        .coupon-header::after { right: -15px; }
+
+        .coupon-body {
+            padding: 2.5rem 2rem;
+        }
+
+        .coupon-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            display: block;
+            text-shadow: 0 0 20px rgba(255,255,255,0.4);
+        }
+
+        .coupon-title {
+            font-size: 1.8rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            text-shadow: 0 0 10px rgba(0, 242, 255, 0.3);
+        }
+
+        .coupon-desc {
+            font-size: 1.1rem;
+            color: #ddd;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .watermark {
+            font-size: 0.75rem;
+            color: #666;
+            margin-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 0.5rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        .btn-download {
+            margin-top: 20px;
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-download:hover {
+            background: var(--primary);
+            color: white;
+            box-shadow: var(--glow-primary);
+        }
+
+        @keyframes popUp {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">Zentix<span class="brand-span">Coupons</span></a>
+        <a href="index.html" class="btn btn-outline" style="padding: 8px 20px; font-size: 0.9rem;">Back to Hub</a>
+    </nav>
+
+    <div class="container coupon-container glass-panel">
+        <header class="hero" style="padding: 1rem;">
+            <h1>Digital <span style="color: var(--secondary);">Love Coupons</span></h1>
+            <p>Click below to generate a random surprise for your partner!</p>
+        </header>
+
+        <button onclick="generateCoupon()" class="btn btn-primary" style="width: 100%; font-size: 1.2rem; padding: 15px;">
+            🎲 Shuffle & Get Coupon
+        </button>
+
+        <!-- Shuffle Result -->
+        <div id="result-wrapper" style="display: none;">
+            <div id="result-area">
+                <div class="coupon-card">
+                    <div class="coupon-header">Zentix Official Voucher</div>
+                    <div class="coupon-body">
+                        <span class="coupon-icon" id="cIcon">🎁</span>
+                        <h2 class="coupon-title" id="cTitle">Mystery Gift</h2>
+                        <p class="coupon-desc" id="cDesc">Loading your surprise...</p>
+                        
+                        <div class="watermark">
+                            // Generated by Zentix Valentine Hub
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <br>
+            <div style="display: flex; gap: 10px; justify-content: center; margin-top: 15px;">
+                <button onclick="downloadImage()" class="btn btn-download">⬇ Download</button>
+                <button onclick="shareImage()" class="btn btn-download" style="border-color: var(--secondary); color: var(--secondary);">📤 Share</button>
+            </div>
+        </div>
+        <footer style="text-align: center; padding: 20px; color: white; width: 100%; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 50px;">
+            <p>Powered by <strong><a href="https://web.facebook.com/profile.php?id=61584803565063" target="_blank" style="color: inherit; text-decoration: none;">Zentix</a></strong> & <strong><a href="https://kaali-k.github.io/kalanasahan-portfolio/" target="_blank" style="color: inherit; text-decoration: none;">K.S.D</a></strong></p>
+            <p style="font-size: 0.8rem; margin-top: 5px;">Powered by Zentix - Connected Intelligence</p>
+            <p style="font-size: 0.8rem; margin-top: 5px;">#ZentixValentine #TechLove</p>
+        </footer>
+    </div>
+
+    <script src="data.js"></script>
+    <script>
+        function generateCoupon() {
+            // Get random coupon
+            const randomCoupon = couponData[Math.floor(Math.random() * couponData.length)];
+            
+            // Populate DOM
+            document.getElementById('cIcon').innerText = randomCoupon.icon;
+            document.getElementById('cTitle').innerText = randomCoupon.title;
+            document.getElementById('cDesc').innerText = randomCoupon.desc;
+
+            // Show result
+            const wrapper = document.getElementById('result-wrapper');
+            const resultArea = document.getElementById('result-area');
+            
+            wrapper.style.display = 'block';
+            resultArea.style.display = 'block';
+
+            // Re-trigger animation
+            resultArea.style.animation = 'none';
+            resultArea.offsetHeight; /* trigger reflow */
+            resultArea.style.animation = 'popUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+        }
+
+        function downloadImage() {
+            const element = document.getElementById("result-area");
+            // The container background is transparent, but we want the image to look clean
+            // The coupon-card itself has a background, but let's capture strict bounds
+            html2canvas(element, { 
+                backgroundColor: null, // Transparent bg for the canvas itself
+                scale: 2 // Higher resolution
+            }).then(canvas => {
+                const link = document.createElement("a");
+                link.download = "zentix-love-coupon.png";
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+        }
+
+        async function shareImage() {
+            const element = document.getElementById("result-area");
+            try {
+                // Capture canvas
+                const canvas = await html2canvas(element, { 
+                    backgroundColor: null, 
+                    scale: 2 
+                });
+                
+                canvas.toBlob(async (blob) => {
+                    if (!blob) return;
+
+                    // Native Share
+                    if (navigator.share) {
+                        const file = new File([blob], "zentix-love-coupon.png", { type: "image/png" });
+                        try {
+                            await navigator.share({
+                                files: [file],
+                                title: 'Zentix Love Coupon',
+                                text: 'I got this coupon for you! #ZentixValentine'
+                            });
+                        } catch (err) {
+                            console.log("Share skipped", err);
+                        }
+                    } else {
+                        alert("Sharing not supported on this device. Please Download instead!");
+                    }
+                });
+            } catch (err) {
+                console.error("Error sharing:", err);
+            }
+        }
+    </script>
+</body>
+</html>

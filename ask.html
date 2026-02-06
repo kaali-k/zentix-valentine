@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine? | Zentix</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="global.css">
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        /* Specific override for this page to center everything */
+        body {
+            /* Inherits global gradient but we ensure centering */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column; 
+        }
+        nav {
+            position: absolute;
+            top: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">Zentix<span class="brand-span">Love</span></a>
+        <a href="index.html" class="btn btn-outline" style="padding: 8px 20px; font-size: 0.9rem;">Back to Hub</a>
+    </nav>
+
+    <div class="container" style="margin-top: 60px;"> <!-- Margin for fixed nav -->
+        <!-- Floating Hearts Background -->
+        <div class="background-hearts"></div>
+
+        <div class="content">
+            <h1 class="bounce-in">Will you be my <span class="highlight">Valentine?</span> 💖</h1>
+            
+            <div class="gif-container" style="display:flex; justify-content:center; margin-bottom: 2rem;">
+                <!-- Reliable CSS Animated Heart (No external image to break) -->
+                <div class="css-heart"></div>
+            </div>
+
+            <div class="btn-group">
+                <button id="yesBtn" class="btn btn-primary">YES! 😍</button>
+                <button id="noBtn" class="btn btn-secondary">NO 😢</button>
+            </div>
+        </div>
+
+        <div id="successMessage" class="success-overlay hidden">
+            <div class="success-content">
+                <h1>Yay! I knew it! ❤️</h1>
+                <p>Zentix wishing you a Happy Valentine's Day!</p>
+                <div class="branding">
+                    Powered by <strong><a href="https://web.facebook.com/profile.php?id=61584803565063" target="_blank" style="color: inherit; text-decoration: none;">Zentix</a></strong> & <strong><a href="https://kaali-k.github.io/kalanasahan-portfolio/" target="_blank" style="color: inherit; text-decoration: none;">K.S.D</a></strong>
+                    <p style="font-size: 0.7rem; margin-top: 5px; opacity: 0.8;">Powered by Zentix - Connected Intelligence</p>
+                    <p style="font-size: 0.7rem; margin-top: 5px; opacity: 0.8;">#ZentixValentine #TechLove</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer style="text-align: center; padding: 20px; color: white; width: 100%;">
+        <p>Powered by <strong><a href="https://web.facebook.com/profile.php?id=61584803565063" target="_blank" style="color: inherit; text-decoration: none;">Zentix</a></strong> & <strong><a href="https://kaali-k.github.io/kalanasahan-portfolio/" target="_blank" style="color: inherit; text-decoration: none;">K.S.D</a></strong></p>
+        <p style="font-size: 0.8rem; margin-top: 5px;">Powered by Zentix - Connected Intelligence</p>
+        <p style="font-size: 0.8rem; margin-top: 5px;">#ZentixValentine #TechLove</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
