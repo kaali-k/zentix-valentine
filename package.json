@@ -1,0 +1,11 @@
+{
+  "name": "zentix-valentine",
+  "version": "1.0.0",
+  "description": "Tech-themed Valentine's experience",
+  "scripts": {
+    "build": "echo 'No build step required'"
+  },
+  "keywords": [],
+  "author": "Zentix",
+  "license": "ISC"
+}
