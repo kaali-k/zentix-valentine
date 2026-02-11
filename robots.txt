@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://zentix-valentine.netlify.app/sitemap.xml
