@@ -1,0 +1,7 @@
+{
+  "name": "zentix-valentine",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "mkdir -p dist && cp -rv index.html ask.html names.html coupons.html snippets.html *.css *.js robots.txt sitemap.xml dist/"
+  }
+}
