@@ -1,9 +1,0 @@
-[build]
-  # Remove the command altogether.
-  # Let Netlify do the default.
-  publish = "."
-
-[[headers]]
-  for = "/*"
-    [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"
