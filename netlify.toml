@@ -1,11 +1,9 @@
 [build]
-  # No build command needed for a static site
-  command = "echo 'Deploying Static Site'"
-  # Serve files from the root directory
+  # Remove the command altogether.
+  # Let Netlify do the default.
   publish = "."
 
 [[headers]]
-  # Cache control for static assets (optional but good for performance)
   for = "/*"
     [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
